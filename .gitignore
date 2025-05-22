@@ -1,0 +1,17 @@
+# Windows executables
+folder-ripper.exe
+
+# Go build artifacts
+*.exe
+*.exe~
+*.out
+*.test
+
+# Dependency directories
+/vendor/
+
+# Editor/OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/ 
