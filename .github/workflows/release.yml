@@ -18,8 +18,16 @@ jobs:
         with:
           go-version: '1.21'
 
-      - name: Build Windows binary
-        run: go build -ldflags="-H=windowsgui" -o folder-ripper.exe main.go
+      - name: Build Windows binary (optimized)
+        run: go build -ldflags="-H=windowsgui -s -w" -o folder-ripper.exe main.go
+
+      - name: Download UPX
+        run: |
+          curl -LO https://github.com/upx/upx/releases/download/v4.2.1/upx-4.2.1-win64.zip
+          unzip upx-4.2.1-win64.zip
+
+      - name: Compress binary with UPX
+        run: ./upx-4.2.1-win64/upx --best --lzma folder-ripper.exe
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
